@@ -30,7 +30,7 @@ class NEQC_NN(nn.Module):
         self.l1 = nn.Linear(4, 10)
         self.l2 = nn.Linear(10, 20)
         self.l3 = nn.Linear(20, (3 * self.num_qubits + 4 * self.num_blocks))
-        self.func = nn.Tanh()  # activation Function
+        self.func = nn.PReLU()  # activation Function
         self.layernorm1 = nn.LayerNorm(10)
         self.layernorm2 = nn.LayerNorm(20)
         self.layernorm3 = nn.LayerNorm(3 * self.num_qubits + 4 * self.num_blocks)
