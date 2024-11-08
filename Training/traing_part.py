@@ -21,9 +21,6 @@ def main_training_part(num_qubits, nMax, model_list, num_bins, num_fidelity, n, 
 
     check_converge_per_iter = 100  # check convergence every 100 iterations
 
-    loss_last = 1e10  # initialize loss_last with a large value to calculate the difference between the current and
-    # last loss
-
     # get the number of circuit blocks based on the number of qubits
     num_block = ccl.compute_circuit_block(num_qubits)
 
@@ -49,6 +46,9 @@ def main_training_part(num_qubits, nMax, model_list, num_bins, num_fidelity, n, 
 
         for model_idx, model_name in enumerate(model_list):
 
+            loss_last = 1e10  # initialize loss_last with a large value to calculate the difference between the
+            # current and last loss
+
             # initialize the model based on its name
             if model_name == 'SQC':
                 model = cnn.SQC(num_qubits, num_block, circuit, input_state, circuit_state)  # initialize SQC model
@@ -59,7 +59,6 @@ def main_training_part(num_qubits, nMax, model_list, num_bins, num_fidelity, n, 
             elif model_name == 'NEQC-CNN':
                 model = cnn.NEQC_CNN(num_qubits, num_block, circuit, input_state,
                                      circuit_state)  # initialize NEQC-CNN model
-                record_model_parameters.record_model_parameters(model, num_qubits, model_name)
             # select the optimizer for training
             optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)  # Stochastic Gradient Descent optimizer
 
@@ -95,12 +94,6 @@ def main_training_part(num_qubits, nMax, model_list, num_bins, num_fidelity, n, 
                             break
                         else:
                             loss_last = ex  # update the last loss value
-
-                    # check if the maximum number of epochs has been exceeded
-                    if nepoch > epoch_max:
-                        break
-                    else:
-                        nepoch += 1  # increase the epoch counter
 
             # after training, save the model's final state and additional data
             output_dir = 'result/express'  # directory to save the results

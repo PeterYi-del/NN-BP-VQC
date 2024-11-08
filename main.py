@@ -2,7 +2,7 @@ import sys
 from Training import traing_part
 import config
 
-num_qubits = 3  # the number of qubits
+num_qubits = 6  # the number of qubits
 n = 10  # total training loops
 
 nMax = config.problem['problems']['nMax']  # maximum number of epochs (iterations)
