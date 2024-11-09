@@ -9,7 +9,7 @@ from tqdm import tqdm
 from Preparing import create_random_circuit as crc, create_random_state as crs, compute_circuit_blocks as ccl, \
     model as cnn
 from Training import compute_cost_function as ccf, compute_express, record_model_parameters
-from Drawing import plot_avg_iteration_vs_loss, polt_loss_landscape as dll
+from Drawing import plot_avg_iteration_vs_loss, plot_loss_landscape as dll
 
 
 def main_training_part(num_qubits, nMax, model_list, num_bins, num_fidelity, n, circuit_state):
